@@ -35,6 +35,7 @@ class FeaturedApps: NSObject {
     }
 }
 
+
 class AppCategory: NSObject {
     
     var name: String?

@@ -25,7 +25,6 @@ class FeaturedAppsController: UICollectionViewController, UICollectionViewDelega
         navigationItem.title = "Featured Apps"
         
         AppCategory.fetchFeaturedApps { (featuredApps) in
-            
             // data source for banner
             self.featuredApps = featuredApps
             

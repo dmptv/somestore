@@ -15,23 +15,23 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
         didSet {
             
             if app?.screenshots != nil {
+                // stop task
                 return
             }
- 
+           
             if let id = app?.id {
                 
                 var urlString = String()
-                
                 if id == 1 {
                      urlString = "https://api.myjson.com/bins/15jbtb"
                 } else {
                      urlString = "https://api.myjson.com/bins/7nrhr"
                 }
                 
-                URLSession.shared.dataTask(with: URL(string: urlString)!, completionHandler: { (data, responce, error) in
+                URLSession.shared.dataTask(with: URL.init(string: urlString)!, completionHandler: { (data, responce, error) in
                     
                     if error != nil {
-                        print(error?.localizedDescription ?? [])
+                        print(error?.localizedDescription ?? [] )
                         return
                     }
                     
@@ -41,7 +41,7 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
                         let appDetail = App()
                         appDetail.setValuesForKeys(json! )
                         
-                        // сохраним app c распасенными пропертями
+                        // save parced app
                         self.app = appDetail
                         
                         DispatchQueue.main.async {
@@ -53,7 +53,6 @@ class AppDetailController: UICollectionViewController, UICollectionViewDelegateF
                     }
                     
                 }).resume()
-  
             }
         }
     }

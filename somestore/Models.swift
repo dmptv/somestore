@@ -10,7 +10,7 @@
 import UIKit
 
 class FeaturedApps: NSObject {
-    // контейнер обжект (вместо общего массива для всех категорий)
+    // container object instead of nested array
     
     var bannerCategory: AppCategory?
     var appCategories: [AppCategory]?
@@ -19,7 +19,6 @@ class FeaturedApps: NSObject {
         if key == "categories" {
             appCategories = [AppCategory]()
             
-            // раскидаем по items
             for dict in (value as? [[String:Any]])! {
                 let appCategory = AppCategory()
                 appCategory.setValuesForKeys(dict)
@@ -27,7 +26,6 @@ class FeaturedApps: NSObject {
             }
         } else if key == "bannerCategory" {
             bannerCategory = AppCategory()
-            // для header
             bannerCategory?.setValuesForKeys(value as! [String : Any])
         } else {
             super.setValue(value, forKey: key)
@@ -48,7 +46,6 @@ class AppCategory: NSObject {
     
     override func setValue(_ value: Any?, forKey key: String) {
         if key == "apps" {
-            // зайдем в apps и раскидаем его по items
             apps = [App]()
             for dict in value as! [[String: AnyObject]] {
                 let app = App()
@@ -75,9 +72,9 @@ class AppCategory: NSObject {
                 
                 let featuredApps = FeaturedApps()
                 
-                // весь json распределим по ключам
+                // json -> keys
                 featuredApps.setValuesForKeys(json!)
-  
+      
                 DispatchQueue.main.async {
                     completionHandler(featuredApps)
                 }
@@ -131,6 +128,7 @@ class App: NSObject {
     var imageName: String?
     var price: NSNumber?
     
+    // get them by id later
     var screenshots: [String]?
     var desc: String?
     var appInformation: AnyObject?

@@ -112,31 +112,25 @@ class AppCell: UICollectionViewCell {
     
     var app: App? {
         didSet {
-            
             if let name = app?.name {
                 nameLabel.text = name
              
-                // options - origin and fontLeading for calculating line heigths
                 let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
                 let size = CGSize(width: frame.width, height: 1000)
                 
-                // because we already know nameLabel.text
+                // rect будет знать только size, но origin не настоящий
                 let rect = NSString(string: name).boundingRect(with: size, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: attributes, context: nil)
                 
                 if rect.height > 20 {
-                    
                     categoryLabel.frame = CGRect(x: 0, y: frame.width + 38 , width: frame.width, height: 20)
                     priceLabel.frame = CGRect(x: 0, y: frame.width + 56, width: frame.width, height: 20)
-                    
                 } else {
-                    
                     // поднимем их по оси У
                     categoryLabel.frame = CGRect(x: 0, y: frame.width + 22 , width: frame.width, height: 20)
                     priceLabel.frame = CGRect(x: 0, y: frame.width + 40, width: frame.width, height: 20)
                 }
                 
                 nameLabel.frame = CGRect(x: 0, y: frame.width + 5, width: frame.width, height: 40)
-                
                 // label ужмется вокруг текста если придет 1 строка
                 nameLabel.sizeToFit()
             }
